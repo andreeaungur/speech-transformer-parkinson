@@ -1,0 +1,31 @@
+Objective
+-To develop an AI model based on a Transformer architecture (Audio Spectrogram Transformer – AST) for classifying speech between healthy subjects and Parkinson’s 
+disease patients, using audio data from the PC-GITA dataset.
+
+2. Data Preparation
+-Utilized the PC-GITA dataset containing various speech recordings (vowels, DDK tasks, sentences, monologues).
+-Implemented filtering to select only the necesary files for each case.
+-Created an automatic labeling method based on file paths to separate “healthy” subjects from “parkinson” patients.
+-Performed stratified splitting of data into training and validation sets (80% / 20%).
+
+3. Preprocessing and Augmentation
+-Loaded audio files with torchaudio, converted to mono, and resampled to 16 kHz.
+-Applied audio augmentations on the training set (Gaussian noise, time stretch, pitch shift, and shift) to improve model robustness.
+-Used ASTFeatureExtractor to convert audio signals into spectrogram representations as model input.
+
+4. Model
+-Used the pretrained AST model (“MIT/ast-finetuned-audioset-10-10-0.4593”) and fine-tuned it on PC-GITA data.
+-Adjusted the model for binary classification: healthy vs. parkinson.
+-Employed AdamW optimizer with a small learning rate (2e-5).
+
+5. Training
+-Implemented a manual training loop over 3 epochs.
+-Computed average training loss and validation accuracy after each epoch.
+
+6. Results and Saving
+After training, saved the fine-tuned model and feature extractor locally for future use.
+The model successfully learned to distinguish between speech from healthy subjects and Parkinson’s patients on given samples.
+
+Conclusions
+Throughout this project, I managed to put together a complete workflow for detecting Parkinson’s disease from speech using a Transformer-based model.
+The results show that the model can successfully learn patterns that distinguish Parkinson’s speech from healthy speech.
